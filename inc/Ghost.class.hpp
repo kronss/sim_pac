@@ -2,8 +2,14 @@
 # define GHOST_CLASS_HPP
 
 # include "Unit.class.hpp"
-# include <string>
+# include "Pacman.class.hpp"
 
+# include <string>
+# include <ncurses.h>
+
+#define O 40
+
+# define	ABS(x)	((x < 0) ? -(x) : (x))
 
 class Pacman;
 
@@ -12,6 +18,9 @@ class Pacman;
 
 	public:
 		int matrix[19][19];
+
+
+
 		Ghost(std::string std, int map[][19]);
 		~Ghost();
 		

@@ -27,6 +27,7 @@ int		main()
 	{
 		win.keyEvent(pacman);
 		win.printMap();
+		blinky.makeStep(pacman, win._map);
 	}	
 
 
