@@ -163,26 +163,23 @@ void		Window::keyEvent(Pacman &obj)
 		else if (key == 'w')
 		{
 			obj.moveUp(_map);
-			setIdByCord(obj);
 		}
 		else if (key == 's')
 		{
 			obj.moveDown(_map);
-			setIdByCord(obj);
 		}	
 		else if (key == 'a')
 		{
 			obj.moveLeft(_map);
-			setIdByCord(obj);
 		}
 		else if (key == 'd')
 		{
 			obj.moveRight(_map);
-			setIdByCord(obj);
 		}	
 		else if (key == SPACE)
 			_pause ^= 1;
 
+		setIdByCord(obj);
 		mvprintw(g_size + 7, 0, "%d\n", key);
 
 		// else if (key == ESC)
@@ -231,7 +228,7 @@ void		Window::periodEvent()
 
 	nodelay(stdscr, TRUE);
 									mvprintw(g_size + 10, 0, "pause == %d\n", _pause); //
-	period = (1 / 50);
+	period = (1 / 100);
 	MSLEEP(period);
 }
 

@@ -49,7 +49,7 @@ int Unit::moveUp(int map[][19])
 
 	_cord_y -= 1;
 
-	return (0);
+	return (1);
 }
 
 int Unit::moveDown(int map[][19])
@@ -61,7 +61,7 @@ int Unit::moveDown(int map[][19])
 
 	_cord_y += 1;
 
-	return (0);
+	return (1);
 }
 
 int Unit::moveLeft(int map[][19])
@@ -72,7 +72,7 @@ int Unit::moveLeft(int map[][19])
 	map[getY()][getX()] = 0;
 
 	_cord_x -= 1;
-	return (0);
+	return (1);
 }
 
 int Unit::moveRight(int map[][19])
@@ -83,7 +83,7 @@ int Unit::moveRight(int map[][19])
 	map[getY()][getX()] = 0;
 
 	_cord_x += 1;
-	return (0);
+	return (1);
 }
 
 

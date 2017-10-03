@@ -26,7 +26,7 @@ class Pacman;
 		
 		// void	intitMatrixPriority(int map[][19]);
 		
-		void	makeStep(Pacman &pacman, int map[][19]);
+		void	makeStep(Window &win, Pacman &pacman, int map[][19]);
 
 	};
 

@@ -27,10 +27,10 @@ Ghost::~Ghost()
 	;
 }
 
-void	Ghost::makeStep(Pacman &pacman, int map[][19])
+void	Ghost::makeStep(Window &win, Pacman &pacman, int map[][19])
 {
 //reset matrix
-
+{
 	for (register int j = 0; j < 19; ++j)
 	{
 		for (register int i = 0; i < 19; ++i)
@@ -64,3 +64,48 @@ mvprintw(j + 1 , ii + 50, "[%2.2d]", matrix[j][i]); //debug
 		}
 	}
 }
+
+	int cur_pty;
+	int y =	getY();
+	int x = getX();
+
+	cur_pty = matrix[y][x];
+
+
+
+
+	if (matrix[y][x + 1] == cur_pty - 1)
+	{
+		moveRight(map);
+	}
+	else if (matrix[y][x - 1] == cur_pty - 1)		
+	{
+		moveLeft(map);
+	}
+	else if (matrix[y - 1][x] == cur_pty - 1)
+	{
+		moveUp(map);
+	}
+	else if (matrix[y + 1][x] == cur_pty - 1)
+	{
+		moveDown(map);
+	}
+}
+
+
+
+// moveRight
+
+
+
+
+
+
+
+
+
+
+
+
+
+
