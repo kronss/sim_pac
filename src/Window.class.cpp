@@ -30,19 +30,33 @@ Window::Window() : _game(1), _pause(1)
 	print_horizontal_line(20, 0, 40);
 	print_vertical_line(0, 0, 20);
 	print_vertical_line(0, 39, 20);
-	this->initMap();
+	mvprintw(19, 39, "<--- exit there");
 
-	// std::cout << "CTOR" << std::endl;
+	attron(COLOR_PAIR(1));
+	mvprintw(22, 2, "01 - pacman");
+	attron(COLOR_PAIR(2));
+	mvprintw(23, 2, "02 - ghost1");
+	attron(COLOR_PAIR(3));
+	mvprintw(24, 2, "03 - ghost2, waiting for a few seconds");
+	attroff(COLOR_PAIR(3));
+	mvprintw(25, 2, "00 - treasure, give You no point)");
+
+	mvprintw(27, 12, "'w' - step up");
+	mvprintw(28, 12, "'s' - step down");
+	mvprintw(29, 12, "'a' - step left");
+	mvprintw(30, 12, "'d' - step right");
+
+	mvprintw(32, 12, "'SPACE' - PAUSE");	
+
+	this->initMap();
 }
 
 
 Window::~Window()
 {
+	nodelay(stdscr, FALSE);
 	getch();
 	endwin();
-
-	std::cout << "DTOR" << std::endl;
-
 }
 
 
@@ -80,16 +94,16 @@ void	Window::initMap()
 		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
 		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
 		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
-		{O ,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,O },
+		{O ,-1,-1,-1,-1,-1,-1,-1,O ,O ,O ,-1,-1,-1,-1,-1,-1,-1,O },
 		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
 		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
 		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
-		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
-		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
-		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
-		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
-		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
-		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
+		{O ,O ,O ,O ,O ,O ,O ,O ,-1,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
+		{O ,O ,O ,O ,O ,O ,O ,O ,-1,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
+		{O ,O ,O ,O ,O ,O ,O ,O ,-1,O ,O ,-1,-1,-1,O ,O ,O ,O ,O },
+		{O ,O ,O ,O ,O ,O ,O ,O ,-1,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
+		{O ,O ,O ,O ,O ,O ,O ,O ,-1,O ,O ,O ,O ,O ,O ,O ,O ,O ,O },
+		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,-1,-1,-1},
 		{O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,O ,-1,O ,O ,O ,O ,O }
 	};
 
@@ -112,6 +126,7 @@ void	Window::initMap()
 				_matrix_priority[j][i] = 0;
 		}
 	}
+	//TODO rebuild matrix
 }
 
 
@@ -123,7 +138,6 @@ int		Window::isGame()
 
 void	Window::printMap()
 {
-	mvprintw(g_size + 5, 0, "dick\n");
 	for (int j = 0, y = 1; j < g_size; ++j, ++y)
 	{
 		for (int i = 0, x = 1; i < g_size; ++i, x+=2)
@@ -163,6 +177,7 @@ void		Window::keyEvent(Pacman &obj)
 		else if (key == 'w')
 		{
 			obj.moveUp(_map);
+			
 		}
 		else if (key == 's')
 		{
@@ -180,11 +195,6 @@ void		Window::keyEvent(Pacman &obj)
 			_pause ^= 1;
 
 		setIdByCord(obj);
-		mvprintw(g_size + 7, 0, "%d\n", key);
-
-		// else if (key == ESC)
-		// 	return ;
-
 		periodEvent();
 }
 
@@ -196,7 +206,6 @@ void		Window::pauseEvent()
 
 	while (_pause == 1)
 	{
-									mvprintw(g_size + 10, 0, "pause == %d\n", _pause); //
 		nodelay(stdscr, FALSE);
 		key = getch();
 		mvprintw(g_size + 7, 0, "%d\n", key);
@@ -204,20 +213,6 @@ void		Window::pauseEvent()
 		{
 			_pause ^= 1;		
 		}
-		// else if (key == 's')
-		// 	break ;
-		// else if (key == 'q')
-		// 	viz->hz -= 10;
-		// else if (key == 'w')
-		// 	viz->hz -= 1;
-		// else if (key == 'e')
-		// 	viz->hz += 1;
-		// else if (key == 'r')
-		// 	viz->hz += 10;
-		// else if (key == ESC)
-		// 	return ;
-		// ((int)viz->hz < 5) ? viz->hz = 5 : 0;
-		// ((int)viz->hz > 1000) ? viz->hz = 1000 : 0;
 	}
 	periodEvent();
 }
@@ -227,8 +222,7 @@ void		Window::periodEvent()
 	double	period;
 
 	nodelay(stdscr, TRUE);
-									mvprintw(g_size + 10, 0, "pause == %d\n", _pause); //
-	period = (1 / 100);
+	period = (1.0 / 50.0);
 	MSLEEP(period);
 }
 

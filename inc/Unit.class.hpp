@@ -5,6 +5,7 @@
 // # include "Window.class.hpp"
 
 // #ifndef 
+#define O 40
 
 
 class Window;

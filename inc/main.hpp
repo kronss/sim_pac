@@ -12,7 +12,7 @@
 # include "Unit.class.hpp"
 # include "Pacman.class.hpp"
 # include "Ghost.class.hpp"
-
+# include "Treasure.class.hpp"
 
 
 

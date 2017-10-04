@@ -24,12 +24,21 @@ Ghost::Ghost(std::string str, int tmp[][19])
 
 Ghost::~Ghost()
 {
-	;
 }
 
-void	Ghost::makeStep(Window &win, Pacman &pacman, int map[][19])
+void	Ghost::makeStep(Window &win, Pacman &pacman, int map[][19], int &sleep)
 {
 //reset matrix
+	if ((++sleep) < 0)
+	{
+		return;
+	}	
+	else if (sleep % 30)
+	{
+		return;
+	}
+
+
 {
 	for (register int j = 0; j < 19; ++j)
 	{
@@ -58,7 +67,7 @@ void	Ghost::makeStep(Window &win, Pacman &pacman, int map[][19])
 				matrix[j][i] = tmp;
 
 
-mvprintw(j + 1 , ii + 50, "[%2.2d]", matrix[j][i]); //debug
+// mvprintw(j + 1 , ii + 50, "[%2.2d]", matrix[j][i]); //debug
 
 
 		}
@@ -74,38 +83,20 @@ mvprintw(j + 1 , ii + 50, "[%2.2d]", matrix[j][i]); //debug
 
 
 
-	if (matrix[y][x + 1] == cur_pty - 1)
+	if (x != 18 && matrix[y][x + 1] == cur_pty - 1)
 	{
 		moveRight(map);
 	}
-	else if (matrix[y][x - 1] == cur_pty - 1)		
+	else if (x != 0 && matrix[y][x - 1] == cur_pty - 1)		
 	{
 		moveLeft(map);
 	}
-	else if (matrix[y - 1][x] == cur_pty - 1)
+	else if (y != 0 && matrix[y - 1][x] == cur_pty - 1)
 	{
 		moveUp(map);
 	}
-	else if (matrix[y + 1][x] == cur_pty - 1)
+	else if (y != 18 && matrix[y + 1][x] == cur_pty - 1)
 	{
 		moveDown(map);
 	}
 }
-
-
-
-// moveRight
-
-
-
-
-
-
-
-
-
-
-
-
-
-

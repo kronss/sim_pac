@@ -14,7 +14,8 @@ INC_NAME =	main.hpp \
 			Window.class.hpp \
 			Unit.class.hpp \
 			Pacman.class.hpp \
-			Ghost.class.hpp
+			Ghost.class.hpp \
+			Treasure.class.hpp
 # add .hpp file ---->
 INC_DIR =	inc
 INC = $(addprefix $(INC_DIR)/, $(INC_NAME))
@@ -32,7 +33,9 @@ SRC_NAME =	main.cpp \
 			Window.class.cpp \
 			Unit.class.cpp \
 			Pacman.class.cpp \
-			Ghost.class.cpp
+			Ghost.class.cpp \
+			Treasure.class.cpp
+
 # add .cpp file ---->
 
 

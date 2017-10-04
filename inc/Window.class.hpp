@@ -1,10 +1,10 @@
 #ifndef WINDOW_CLASS_HPP
-# define WINDOW_CLASS_HPP 1
+# define WINDOW_CLASS_HPP 
 
 
 #include <ncurses.h>
-#include <unistd.h>
 #include <iostream>
+#include <unistd.h>
 
 #include "Unit.class.hpp"
 
