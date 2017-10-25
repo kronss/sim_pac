@@ -1,6 +1,6 @@
 #include "Window.class.hpp"
 
-Window::Window() : _game(1), _pause(1)
+Window::Window() : _pause(1), _game(1)
 {
 	initscr();
 	curs_set(0);
@@ -208,7 +208,7 @@ void		Window::pauseEvent()
 	{
 		nodelay(stdscr, FALSE);
 		key = getch();
-		mvprintw(g_size + 7, 0, "%d\n", key);
+		// mvprintw(g_size + 7, 0, "%d\n", key);
 		if (key == SPACE)
 		{
 			_pause ^= 1;		
